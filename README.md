@@ -23,8 +23,8 @@ _CONFIGURATIONS OVERVIEW:_
  
  
  
+ ** **
  
- 
->Do no sell or distribute this plugin via third party websites or person_
+>Do no sell or distribute this plugin via third party websites or person
 
->Creator rights are reserved to the creator (lfn/BlueJ)_
+>Creator rights are reserved to the creator (lfn/BlueJ)
