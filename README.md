@@ -5,9 +5,8 @@ _MATCH CORRESPONDING PLUGIN VERSION WITH YOUR SERVER MC VERSION_
 - 1.1.0: MC 1.11.2
 - 1.2.0: MC 1.15.1
 
-
-
-
+** **
+** **
 Current Version: 1.0.0
 
 Name: BlocksCounter
