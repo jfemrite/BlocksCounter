@@ -1,9 +1,12 @@
 Current Version: 1.0.0
+
 **This version of BlocksCounter has been tested in 1.11.2**
+
 Version should work _1.10+_
 
 
 >Do no sell or distribute this plugin via third party websites or person
+
 >Creator rights are reserved to the creator (lfn/BlueJ)
 
 
