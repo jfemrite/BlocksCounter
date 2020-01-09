@@ -1,0 +1,5 @@
+main: com.lfn.blockscounter.Main
+name: BlocksCounter
+version: 1.0.0
+author: BlueJ
+website: lfn-us.github.io
