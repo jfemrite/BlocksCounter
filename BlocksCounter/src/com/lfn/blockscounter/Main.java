@@ -3,15 +3,13 @@ package com.lfn.blockscounter;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+
 
 
 
@@ -21,29 +19,64 @@ public class Main extends JavaPlugin implements Listener {
 	private HashMap<Player, Long> timer = new HashMap<>();
 	private HashMap<Player, Integer> blocks = new HashMap<>();
 	private HashMap<Player, Integer> finalBlocks = new HashMap<>();
-
-	private PacketPlayOutChat packet;
 	
 	private String title;
+	private Actionbar actionbar;
 	
 	@Override
 	public void onEnable() {
 	
+		if(setupActionbar()) {
+			Bukkit.getPluginManager().registerEvents(this, this);
+		} else {
+			System.out.println("Server version not compatible with BlocksCounter!");
+			Bukkit.getPluginManager().disablePlugin(this);
+		}
+		
 		this.getConfig().options().copyDefaults();
 		saveDefaultConfig();
 		
-		Bukkit.getPluginManager().registerEvents(this, this);
 		String rawTitle = this.getConfig().getString("BlocksCounterPlus.title");
-		title = rawTitle.replaceAll("&", "§");
+		title = rawTitle.replaceAll("&", "§");	
+		
 	}
 	
+	public boolean setupActionbar() {
+		
+		String version;
+		
+		try {
+			version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+		} catch (ArrayIndexOutOfBoundsException x) {
+			System.out.println("You are not using a compatible server version");
+			return false;
+		}
+		
+		if(version.equals("v1_8_R1")) {
+			actionbar = new Actionbar_1_8_R1();
+		} else if (version.equals("v1_8_R3")) {
+			actionbar = new Actionbar_1_8_R3();
+		} else if (version.equals("v1_11_R1")) {
+			actionbar = new Actionbar_1_11_R1();
+		} else if (version.equals("v1_12_R1")) {
+			actionbar = new Actionbar_1_12_R1();
+		} else if (version.equals("v1_14_R1")) {
+			actionbar = new Actionbar_1_14_R1();
+		} else if (version.equals("v1_15_R1")) {
+			actionbar = new Actionbar_1_15_R1();
+		}
+		
+		return actionbar != null;
+		
+		
+	}
+		
 	@EventHandler
 	public void onBlockUpdate(BlockCountUpdateEvent e) {
 		String finalTitle = title.replace("{BPS}", finalBlocks.get(e.getPlayer()).toString());
-			 
-		packet = new PacketPlayOutChat(ChatSerializer.a("{\"text\":\"" + finalTitle + "\"}"), (byte) 2);
-			
-		((CraftPlayer) e.getPlayer()).getHandle().playerConnection.sendPacket(packet);
+		
+		actionbar.sendActionbar(e.getPlayer(), finalTitle);
+		
 		finalBlocks.remove(e.getPlayer());
 		
 		Bukkit.getScheduler().runTaskLater(this, new Runnable() {
