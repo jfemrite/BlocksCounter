@@ -1,20 +1,9 @@
-**IMPORTANT**
-
-_MATCH CORRESPONDING PLUGIN VERSION WITH YOUR SERVER MC VERSION_
-- 1.0.0: MC 1.8.8
-- 1.1.0: MC 1.11.2
-- 1.2.0: MC 1.15.1
-
-IF YOUR SERVER VERSION IS NOT DISPLAYED, PLUGIN IS UNUSABLE
-Current source code displayed is v1.0.0
-
-** **
-
-Current Version: 1.0.0
+Current Version: 1.3.1
 
 Name: BlocksCounter
 
 This version of BlocksCounter has been tested in 1.8.8, 1.11.2, 1.15.1
+This version is universally compatible with 1.8, 1.10
 
 _CONFIGURATIONS OVERVIEW:_
 - You can edit how the message appears via: BlocksCounterPlus.title
